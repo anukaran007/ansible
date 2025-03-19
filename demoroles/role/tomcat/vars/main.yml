@@ -1,0 +1,5 @@
+tomcat_system_username: tomcat
+tomcat_system_groupname: tomcat
+tomcat_homedir: /opt/tomcat
+tomcat_shell: /bin/false
+tomcat_version: "10.1.39"

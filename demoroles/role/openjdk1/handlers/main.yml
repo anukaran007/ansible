@@ -1,0 +1,10 @@
+---
+- name: update packages
+  ansible.builtin.apt:
+    update_cache: yes
+  when: ansible_facts['distribution'] == "Ubuntu"  
+- name: update packages and install java
+  ansible.builtin.apt:
+        name: "{{ java_package_name }}"
+        update_cache: yes
+        state: present
