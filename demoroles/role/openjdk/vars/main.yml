@@ -1,0 +1,3 @@
+---
+# vars file for skeleton_role
+java_package_name: openjdk-17-jdk
