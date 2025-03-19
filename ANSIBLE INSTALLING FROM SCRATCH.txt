@@ -1,0 +1,42 @@
+ANSIBLE INSTALLING FROM SCRATCH
+
+ sudo vi /etc/ssh/sshd_config.d/
+
+sudo systemctl restart ssh
+sudo adduser devops
+sudo visudo
+devops ALL=(ALL:ALL) NOPASSWD:ALL
+
+
+
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible -y
+
+
+ssh-keygen -t rsa -b 4096
+
+ssh-copy-id devops@<node private ip address>
+
+exit
+
+
+ssh <node private ip adress>
+
+mkdir FILE NAME
+
+cd file name/
+
+vi hosts #paste node1 ip address
+
+
+vi web.yaml
+
+ansible -I hosts -m ping all
+
+
+ansible-playbook --syntax-check web.yaml
+ansible-playbook -i hosts web.yaml
+
+

@@ -1,0 +1,29 @@
+---
+- name: installing tomcat into ubuntu server
+  hosts: localhost
+  become: yes
+  tasks:
+   - name: updating packages and install java
+     ansible.builtin.apt:
+       name: tomcat
+       update_cache: yes
+       state: present
+   - name: ensure group tomcat exists
+     ansible.builtin.group:
+       name: tomcat
+       state: present
+   - name: creating user for tomcat
+     ansible.builtin.user:
+       name: tomcat
+       home: /opt/tomcat       
+       system: yes
+       group: tomcat
+       shell: bin/false
+   - name: downloading tomcat
+     ansible.builtin.unarchive:
+       src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.39/bin/apache-tomcat-10.1.39.tar.gz
+       dest: /opt/tomcat
+       remote_src: yes
+       owner: tomcat
+       group: tomcat
+

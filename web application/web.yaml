@@ -1,0 +1,29 @@
+--- 
+- name: deploying website in instance
+  hosts: all
+  become: yes
+  tasks:
+    - name: installing apache
+      ansible.builtin.apt:
+        name: apache2
+        update_cache: yes
+        state: present
+    - name: enable ans ensure apache is started
+      ansible.builtin.systemd_service:
+        name: apache2
+        enabled: yes
+        state: started
+    - name: unzip is installed
+      ansible.builtin.apt:
+        name: unzip
+        state: present
+    - name: download and extract website
+      ansible.builtin.unarchive:
+        src: https://www.free-css.com/assets/files/free-css-templates/download/page6/clothes-collection.zip
+        dest: /tmp 
+        remote_src: yes
+    - name: copy the html folder to educate
+      ansible.builtin.copy:
+        src: /tmp/clothes-collection/
+        dest: /var/www/html/ssh
+        remote_src: yes
